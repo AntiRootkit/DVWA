@@ -4,6 +4,7 @@ Damn Vulnerable Web Application (DVWA) is a PHP/MySQL web application that is da
 
 The aim of DVWA is to **practice some of the most common web vulnerability**, with **various difficultly levels**, with a simple straightforward interface.
 Please note, there are **both documented and undocumented vulnerability** with this software. This is intentional. You are encouraged to try and discover as many issues as possible.
+
 - - -
 
 ## WARNING!
@@ -47,12 +48,10 @@ DVWA is available either as a package that will run on your own web server or as
 
 ## Installation
 
-### Installation Videos
-
-- [How to setup DVWA (Damn Vulnerable Web Application) on Ubuntu](https://www.youtube.com/watch?v=5BG6iq_AUvM) [21:01 minutes]
-- [Installing Damn Vulnerable Web Application (DVWA) on Windows 10](https://www.youtube.com/watch?v=cak2lQvBRAo) [12:39 minutes]
-
 ### Windows + XAMPP
+
+Installation video:
+https://www.youtube.com/watch?v=GzIj07jt8rM
 
 The easiest way to install DVWA is to download and install [XAMPP](https://www.apachefriends.org/en/xampp.html) if you do not already have a web server setup.
 
@@ -81,21 +80,6 @@ The variables are set to the following by default:
 $_DVWA[ 'db_user' ] = 'root';
 $_DVWA[ 'db_password' ] = 'p@ssw0rd';
 $_DVWA[ 'db_database' ] = 'dvwa';
-```
-
-Note, if you are using MariaDB rather than MySQL (MariaDB is default in Kali), then you can't use the database root user, you must create a new database user. To do this, connect to the database as the root user then use the following commands:
-
-```
-mysql> create database dvwa;
-Query OK, 1 row affected (0.00 sec)
-
-mysql> grant all on dvwa.* to dvwa@localhost identified by 'xxx';
-Query OK, 0 rows affected, 1 warning (0.01 sec)
-
-mysql> flush privileges;
-Query OK, 0 rows affected (0.00 sec)
-
-
 ```
 
 ### Other Configuration

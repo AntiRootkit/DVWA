@@ -7,10 +7,6 @@ if( !defined( 'DVWA_WEB_PAGE_TO_ROOT' ) ) {
 
 session_start(); // Creates a 'Full Path Disclosure' vuln.
 
-if (!file_exists(DVWA_WEB_PAGE_TO_ROOT . 'config/config.inc.php')) {
-	die ("DVWA System error - config file not found. Copy config/config.inc.php.dist to config/config.inc.php and configure to your environment.");
-}
-
 // Include configs
 require_once DVWA_WEB_PAGE_TO_ROOT . 'config/config.inc.php';
 require_once( 'dvwaPhpIds.inc.php' );
@@ -204,8 +200,6 @@ function dvwaHtmlEcho( $pPage ) {
 		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'captcha', 'name' => 'Insecure CAPTCHA', 'url' => 'vulnerabilities/captcha/' );
 		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'sqli', 'name' => 'SQL Injection', 'url' => 'vulnerabilities/sqli/' );
 		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'sqli_blind', 'name' => 'SQL Injection (Blind)', 'url' => 'vulnerabilities/sqli_blind/' );
-		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'weak_id', 'name' => 'Weak Session IDs', 'url' => 'vulnerabilities/weak_id/' );
-		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'xss_d', 'name' => 'XSS (DOM)', 'url' => 'vulnerabilities/xss_d/' );
 		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'xss_r', 'name' => 'XSS (Reflected)', 'url' => 'vulnerabilities/xss_r/' );
 		$menuBlocks[ 'vulnerabilities' ][] = array( 'id' => 'xss_s', 'name' => 'XSS (Stored)', 'url' => 'vulnerabilities/xss_s/' );
 	}
@@ -439,7 +433,7 @@ function dvwaButtonSourceHtmlGet( $pId ) {
 
 if( $DBMS == 'MySQL' ) {
 	$DBMS = htmlspecialchars(strip_tags( $DBMS ));
-	$DBMS_errorFunc = 'mysqli_error()';
+	$DBMS_errorFunc = 'mysql_error()';
 }
 elseif( $DBMS == 'PGSQL' ) {
 	$DBMS = htmlspecialchars(strip_tags( $DBMS ));
@@ -555,7 +549,7 @@ $phpMagicQuotes   = 'PHP function magic_quotes_gpc: <span class="' . ( ini_get( 
 $phpURLInclude    = 'PHP function allow_url_include: <span class="' . ( ini_get( 'allow_url_include' ) ? 'success">Enabled' : 'failure">Disabled' ) . '</span>';                                   // RFI
 $phpURLFopen      = 'PHP function allow_url_fopen: <span class="' . ( ini_get( 'allow_url_fopen' ) ? 'success">Enabled' : 'failure">Disabled' ) . '</span>';                                       // RFI
 $phpGD            = 'PHP module gd: <span class="' . ( ( extension_loaded( 'gd' ) && function_exists( 'gd_info' ) ) ? 'success">Installed' : 'failure">Missing' ) . '</span>';                    // File Upload
-$phpMySQL         = 'PHP module mysql: <span class="' . ( ( extension_loaded( 'mysqli' ) && function_exists( 'mysqli_query' ) ) ? 'success">Installed' : 'failure">Missing' ) . '</span>';                // Core DVWA
+$phpMySQL         = 'PHP module mysql: <span class="' . ( ( extension_loaded( 'mysql' ) && function_exists( 'mysqli_query' ) ) ? 'success">Installed' : 'failure">Missing' ) . '</span>';                // Core DVWA
 $phpPDO           = 'PHP module pdo_mysql: <span class="' . ( extension_loaded( 'pdo_mysql' ) ? 'success">Installed' : 'failure">Missing' ) . '</span>';                // SQLi
 
 $DVWARecaptcha    = 'reCAPTCHA key: <span class="' . ( ( isset( $_DVWA[ 'recaptcha_public_key' ] ) && $_DVWA[ 'recaptcha_public_key' ] != '' ) ? 'success">' . $_DVWA[ 'recaptcha_public_key' ] : 'failure">Missing' ) . '</span>';

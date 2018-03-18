@@ -60,8 +60,11 @@ else {
 				User ID:";
 	if( $vulnerabilityFile == 'medium.php' ) {
 		$page[ 'body' ] .= "\n				<select name=\"id\">";
-
-		for( $i = 1; $i < $number_of_rows + 1 ; $i++ ) { $page[ 'body' ] .= "<option value=\"{$i}\">{$i}</option>"; }
+		$query  = "SELECT COUNT(*) FROM users;";
+		$result = mysqli_query($GLOBALS["___mysqli_ston"],  $query ) or die( '<pre>' . ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . '</pre>' );
+		$num    = mysql_result( $result, 0 );
+		$i      = 0;
+		while( $i < $num ) { $i++; $page[ 'body' ] .= "<option value=\"{$i}\">{$i}</option>"; }
 		$page[ 'body' ] .= "</select>";
 	}
 	else

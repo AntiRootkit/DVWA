@@ -21,8 +21,7 @@ if( isset( $_GET[ 'Login' ] ) ) {
 
 	if( $result && mysqli_num_rows( $result ) == 1 ) {
 		// Get users details
-		$row    = mysqli_fetch_assoc( $result );
-		$avatar = $row["avatar"];
+		$avatar = mysql_result( $result, 0, "avatar" );
 
 		// Login successful
 		$html .= "<p>Welcome to the password protected area {$user}</p>";
